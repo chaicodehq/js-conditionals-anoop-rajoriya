@@ -30,4 +30,28 @@
  */
 export function calculateShipping(weight, country, orderTotal) {
   // Your code here
+  if (weight <= 0 || orderTotal < 0) return -1
+
+  var shippingCosts = {
+    min: country === "US" ? 5 : 15,
+    avg: country === "US" ? 10 : 25,
+    max: country === "US" ? 15 : 40,
+  }
+
+  var cost = 0;
+
+  if (weight > -1 && weight <= 1) {
+    cost = shippingCosts.min
+  } else if (weight > 1 && weight <= 5) {
+    cost = shippingCosts.avg
+  } else {
+    cost = shippingCosts.max
+  }
+
+  if (country === "US") {
+    return orderTotal > 50 ? 0 : cost
+  } else {
+    return orderTotal > 100 ? 0 : cost
+  }
+
 }

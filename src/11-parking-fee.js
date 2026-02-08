@@ -34,4 +34,21 @@
  */
 export function calculateParkingFee(hours, vehicleType) {
   // Your code here
+  var vehiclePrice = {
+    car: {
+      initial: 5,
+      base: 3,
+      max: 30
+    },
+    motorcycle: {
+      initial: 3,
+      base: 2,
+      max: 18
+    },
+    bus: {
+      initial: 10,
+      base: 7,
+      max: 60
+    }
+  }
 }

@@ -27,4 +27,30 @@
  */
 export function calculateTax(income) {
   // Your code here
+  if (income <= 0) {
+    return 0
+  }
+
+  var brackets = [
+    { limit: 10000, ratio: 0.0 },
+    { limit: 30000, ratio: 0.10 },
+    { limit: 70000, ratio: 0.20 },
+    { limit: Infinity, ratio: 0.30 },
+  ]
+
+  var total_tax = 0
+  var previous_limit = 0
+
+  for (var bracket of brackets) {
+    var { limit, ratio } = bracket
+    if (income > previous_limit) {
+      var tax_in_this_bracket = Math.min(income, limit) - previous_limit;
+      total_tax += tax_in_this_bracket * ratio
+      previous_limit = limit
+    } else {
+      break;
+    }
+  }
+
+  return total_tax
 }

@@ -26,4 +26,21 @@
  */
 export function calculateGrade(score, hasExtraCredit) {
   // Your code here
+  if (score < 0 || score > 100) {
+    return "INVALID"
+  }
+
+  var total_score = Math.min((score + (hasExtraCredit ? 5 : 0)), 100)
+
+  if (total_score <= 59) {
+    return "F"
+  } else if (total_score >= 60 && total_score <= 69) {
+    return "D"
+  } else if (total_score >= 70 && total_score <= 79) {
+    return "C"
+  } else if (total_score >= 80 && total_score <= 89) {
+    return "B"
+  } else {
+    return "A"
+  }
 }
