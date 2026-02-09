@@ -34,21 +34,43 @@
  */
 export function calculateParkingFee(hours, vehicleType) {
   // Your code here
-  var vehiclePrice = {
-    car: {
-      initial: 5,
-      base: 3,
-      max: 30
-    },
-    motorcycle: {
-      initial: 3,
-      base: 2,
-      max: 18
-    },
-    bus: {
-      initial: 10,
-      base: 7,
-      max: 60
+
+  var vehicles = ["car", "motorcycle", "bus"]
+  var feeStructure = [{
+    initial: 5,
+    base: 3,
+    max: 30
+  }, {
+    initial: 3,
+    base: 2,
+    max: 18
+  }, {
+    initial: 10,
+    base: 7,
+    max: 60
+  }]
+
+  var roundedHours = Math.ceil(hours)
+  var vehicleIndex = vehicles.indexOf(vehicleType.toLowerCase())
+
+  if (roundedHours <= 0 || vehicleIndex < 0 || vehicleIndex > 2) return -1
+
+  var fee = 0
+  var carParkingFee = feeStructure[vehicleIndex]
+
+  while (roundedHours > 0) {
+    if (fee > 0) {
+      fee += carParkingFee.base
+    } else {
+      fee += carParkingFee.initial
     }
+
+    roundedHours--
   }
+
+  if (fee > carParkingFee.max) {
+    fee = carParkingFee.max
+  }
+
+  return fee
 }
